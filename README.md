@@ -1,4 +1,4 @@
-# ReportGenerator Mahjong Scorer
+# Mahjong Scorer
 
 Minimal Mahjong (MCR subset) scoring utilities, organized into modules.
 
