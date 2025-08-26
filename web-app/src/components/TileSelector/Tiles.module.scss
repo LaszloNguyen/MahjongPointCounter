@@ -1,0 +1,89 @@
+.tileSelector {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.tileCategory {
+  margin-bottom: 12px;
+
+  h3 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-left: 4px solid #667eea;
+    padding-left: 10px;
+  }
+}
+
+.tileRow {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.tile {
+  background-image: url(../../assets/tiles_cn.jpg);
+
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #667eea;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  &.suitTile:hover {
+    border-color: #48bb78;
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+  }
+
+  &.honorTile:hover {
+    border-color: #ed8936;
+    box-shadow: 0 4px 12px rgba(237, 137, 54, 0.3);
+  }
+
+  &.flowerTile:hover {
+    border-color: #9f7aea;
+    box-shadow: 0 4px 12px rgba(159, 122, 234, 0.3);
+  }
+}
+
+.tileUnicode {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.tileLabel {
+  font-size: 0.7rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+// Scrollbar styling
+.tileSelector::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tileSelector::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.tileSelector::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .tileGrid {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  }
+}

@@ -1,0 +1,241 @@
+.handTiles {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.handSummary {
+  h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+}
+
+.warning {
+  color: #e53e3e;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding: 8px;
+  background: #fed7d7;
+  border-radius: 6px;
+  border-left: 4px solid #e53e3e;
+}
+
+.tilesSection {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+
+  h5 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+}
+
+.meldsSection {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+
+  h5 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+}
+
+.flowersSection {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+
+  h5 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+}
+
+.noMelds {
+  color: #718096;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  background: #f7fafc;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e0;
+}
+
+.meldList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meldItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.meldInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meldType {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.9rem;
+}
+
+.meldSuit {
+  color: #4a5568;
+  font-size: 0.85rem;
+}
+
+.meldTiles {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.meldTile {
+  font-size: 1.2rem;
+  padding: 4px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.removeMeldBtn {
+  align-self: flex-end;
+  padding: 6px 12px;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #c53030;
+  }
+}
+
+.tileRow {
+  display: flex;
+  gap: 10px;
+}
+
+.handTile {
+  &:hover {
+    border-color: #ea6666 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(234, 102, 102, 0.3) !important;
+  }
+}
+
+.removeTileBtn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #e53e3e;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #c53030;
+    transform: scale(1.1);
+  }
+}
+
+.emptyHand {
+  text-align: center;
+  padding: 40px 20px;
+  color: #718096;
+
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.handStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #718096;
+  margin-bottom: 5px;
+}
+
+.statValue {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+// Scrollbar styling
+.handTiles::-webkit-scrollbar {
+  width: 8px;
+}
+
+.handTiles::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.handTiles::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .tilesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  }
+
+  .handStats {
+    grid-template-columns: 1fr;
+  }
+}
