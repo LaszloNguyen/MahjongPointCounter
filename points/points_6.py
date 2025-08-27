@@ -38,6 +38,14 @@ def points_mixed_shifted_chows(sets, is_chow_fn, suit_fn, rank_fn):
     return pts
 
 
+def points_all_types(all_tiles, is_suit_fn, suit_fn, honors_set):
+    suits_present = {suit_fn(t) for t in all_tiles if is_suit_fn(t)}
+    has_honor = any(t in honors_set for t in all_tiles)
+    if suits_present == {'B', 'C', 'D'} and has_honor:
+        return 6
+    return 0
+
+
 def points_two_dragon_pungs(sets):
     dragons = set()
     for s in sets:
@@ -46,10 +54,9 @@ def points_two_dragon_pungs(sets):
     return 6 if len(dragons) >= 2 else 0
 
 
-def points_all_types(all_tiles, is_suit_fn, suit_fn, honors_set):
-    suits_present = {suit_fn(t) for t in all_tiles if is_suit_fn(t)}
-    has_honor = any(t in honors_set for t in all_tiles)
-    if suits_present == {'B', 'C', 'D'} and has_honor:
+def points_melded_hand(sets, melds_open, win_by):
+    # 6 points: Four melded groups and is won by discard
+    if melds_open and win_by == 'discard' and len(sets) == 4:
         return 6
     return 0
 
@@ -61,6 +68,7 @@ def compute_points_6(sets, pair, all_tiles, meta, is_chow_fn, suit_fn, rank_fn, 
         'Mixed Shifted Chows': points_mixed_shifted_chows(sets, is_chow_fn, suit_fn, rank_fn),
         'Two Dragon Pungs': points_two_dragon_pungs(sets),
         'All Types': points_all_types(all_tiles, lambda t: t[0] in {'B','C','D'} and t[1:].isdigit(), suit_fn, honors_set),
+        'Melded Hand': points_melded_hand(sets, meta.get('melds_open', False), meta.get('win_by')),
     }
     return sum(p6.values()), {k: v for k, v in p6.items() if v}
 

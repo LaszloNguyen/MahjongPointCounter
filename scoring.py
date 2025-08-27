@@ -8,6 +8,7 @@ from points.points_2 import compute_points_2
 from points.points_4 import compute_points_4
 from points.points_6 import compute_points_6
 from points.points_8 import compute_points_8
+from points.points_12 import compute_points_12
 from points.points_16 import compute_points_16
 from points.points_24 import compute_points_24
 from points.points_64 import compute_points_64
@@ -502,6 +503,9 @@ def score_partition(sets, pair, all_tiles, meta):
     # 8-point rules (module)
     p8_total, p8 = compute_points_8(sets, pair, all_tiles, meta)
 
+    # 12-point rules (module)
+    p12_total, p12 = compute_points_12(sets, pair, all_tiles, meta)
+
     # Exclusions: Mixed Triple Chow does not combine with Mixed Double Chow
     if p8.get('Mixed Triple Chow', 0) and p1.get('Mixed Double Chow', 0):
         p4_adj = 0  # no 4-pt impact here, but keep variable for pattern
@@ -532,6 +536,7 @@ def score_partition(sets, pair, all_tiles, meta):
                  **{k: v for k, v in p4.items() if v},
                  **{k: v for k, v in p6.items() if v},
                  **{k: v for k, v in p8.items() if v},
+                 **{k: v for k, v in p12.items() if v},
                  **{k: v for k, v in p16.items() if v},
                  **{k: v for k, v in p24.items() if v},
                  **{k: v for k, v in p64.items() if v},
@@ -540,7 +545,7 @@ def score_partition(sets, pair, all_tiles, meta):
     # Apply global exclusions across tiers
     breakdown = process_exclusions(breakdown)
 
-    total = p1_total + p2_total + p4_total + p6_total + p8_total + p16_total + p24_total + p64_total + p88_total
+    total = p1_total + p2_total + p4_total + p6_total + p8_total + p12_total + p16_total + p24_total + p64_total + p88_total
     return total, flowers_pts, breakdown
 
 
@@ -550,6 +555,28 @@ def best_score(hand14, meta):
     meta['flowers'] = flowers
     if len(main) != 14:
         raise ValueError("Need 14 non-flower tiles (flowers are allowed separately).")
+    
+    # Check for special "Lesser Honors and Knitted Tiles" rule first
+    from points.points_12 import points_lesser_honors_and_knitted_tiles
+    lesser_honors_points = points_lesser_honors_and_knitted_tiles(main)
+    if lesser_honors_points > 0:
+        # This is a valid hand under the Lesser Honors and Knitted Tiles rule
+        flowers_pts = count_flowers(flowers)
+        breakdown = {'Lesser Honors and Knitted Tiles': lesser_honors_points}
+        valid_min8 = lesser_honors_points >= 8
+        return {
+            'valid': True,
+            'meets_min_8': valid_min8,
+            'base_points': lesser_honors_points,
+            'flower_points': flowers_pts,
+            'total_points_display': lesser_honors_points,
+            'breakdown': breakdown,
+            'sets': (),  # No standard sets for this special hand
+            'pair': (),  # No standard pair for this special hand
+            'flowers': flowers
+        }
+    
+    # Standard mahjong hand processing
     parts = enumerate_partitions(tiles_to_multiset(tuple(sorted(main))))
     best = None
     for sets, pair in parts:

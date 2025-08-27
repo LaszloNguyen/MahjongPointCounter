@@ -68,6 +68,38 @@ EXCLUSIONS = {
         'All Pungs',
         'Pung of Terminals/Honors (non-seat/prevalent)',
     },
+    'Melded Hand': {
+        'Concealed Hand (won by discard)',
+    },
+    'Mixed Shifted Pungs': {
+        'Mixed Double Chow',
+    },
+    'Two Concealed Kongs': {
+        'Melded Kong',
+        'Two Melded Kongs',
+    },
+    'Last Tile Draw': {
+        'Self-Drawn',
+    },
+    'Last Tile Claim': {
+        'Concealed Hand (won by discard)',
+    },
+    'Out with Replacement Tile': {
+        'Self-Drawn',
+    },
+    'Robbing the Kong': {
+        'Concealed Hand (won by discard)',
+    },
+    'Chicken Hand': {
+        # Chicken Hand doesn't exclude other rules since it's a fallback for 0-point hands
+    },
+    'Lesser Honors and Knitted Tiles': {
+        # This rule allows winning without standard 4 triples and a pair
+        # It doesn't exclude other rules since it's a special winning condition
+    },
+    'Knitted Straight': {
+        'Mixed Straight',
+    },
 }
 
 

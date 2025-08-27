@@ -24,12 +24,13 @@ def points_outside_hand(sets, pair, is_chow_fn):
     return 0
 
 
+def points_fully_concealed_hand(melds_open, win_by):
+    return 4 if (not melds_open and win_by == 'self') else 0
+
+
 def points_two_melded_kongs(sets, is_kong_fn):
     return 4 if sum(1 for s in sets if is_kong_fn(s)) == 2 else 0
 
-
-def points_fully_concealed_hand(melds_open, win_by):
-    return 4 if (not melds_open and win_by == 'self') else 0
 
 
 def compute_points_4(sets, pair, all_tiles, meta, is_chow_fn, is_kong_fn):
